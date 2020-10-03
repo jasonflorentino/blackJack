@@ -7,12 +7,16 @@ from time import sleep
 from deckOfCards import Deck
 from deckOfCards import Player
 
+winner = False
+hello = 'LET\'S PLAY BLACKJACK!'
+goodbye = 'Hit the road, Jack!'
+
 """
 FUNCTIONS
 
 """
 
-# Prints the name of the game one char at a time
+# Prints a message one char at a time
 def printTitle(text):
 	print('')
 	for a in text:
@@ -31,18 +35,18 @@ def deal(deck, user, dealer):
 
 # Prints the hand of a given player.
 def playerState(player):
-	sleep(.05)
+	sleep(1)
 	print(player.name + ' hand:')
 	for card in player.hidden:
 		sleep(.05)
 		print('?? of ??')
 	sleep(.05)
 	player.showHand()
-	sleep(.05)
 	print('')
 
 # Counts the score of a player's hand, prints it, and returns it.
 def tallyScore(player):
+	sleep(1)
 	score = 0
 	for card in player.hand:
 		if card.value in (11, 12, 13):
@@ -53,13 +57,14 @@ def tallyScore(player):
 			score = score + 1
 		else:
 			score = score + card.value
-	sleep(1)
-	print('%s hand value: %s\n' % (player.name, str(score)))
+	print(f"{player.name} hand value: {score}\n")
 	return score
 
 # Checks if someone hits 21 or busts
+# Returns True if somebody has won
 def checkScore(score):
 	global winner
+	sleep(.5)
 	if score == 21:
 		winner = True
 		return True
@@ -73,14 +78,14 @@ def checkScore(score):
 
 # Run through dealer's turn
 def dealerTurn(deck, dealer):
-	sleep(1)
+	sleep(.5)
 	print('Dealer\'s turn...\n')
-	sleep(2)
+	sleep(1)
 	dealer.moveToHand(dealer.hidden)
 	playerState(dealer)
 	dealer.score = tallyScore(dealer)
 	if dealer.score >= 17:
-		sleep(2)
+		sleep(1)
 		print('Dealer stays.\n')
 	while dealer.score < 17:
 		sleep(2)
@@ -94,6 +99,7 @@ def dealerTurn(deck, dealer):
 
 # Run through user's turn
 def userTurn(deck, user):
+	sleep(1)
 	move = 'h'
 	while move == 'h':
 		move = input('Hit or Stay? (h/s)\n> ')
@@ -132,16 +138,20 @@ def gameResult(user, comp):
 		sleep(.5)
 		return
 
-# Creates deck and player objects, calls game functions
+"""
+MAIN GAME
+
+"""
+
 def main():
+	# Set up game variables, Create deck and player objects
 	global winner 
 	deck = Deck()
 	user = Player('Your')
 	dealer = Player('Dealer')
-	title = 'LET\'S PLAY BLACKJACK!'
 
 	# Main game structure
-	printTitle(title)
+	printTitle(hello)
 	deal(deck, user, dealer)
 	playerState(dealer)
 	playerState(user)
@@ -150,15 +160,9 @@ def main():
 	if winner == False:
 		dealerTurn(deck, dealer)
 	gameResult(user, dealer)
+
 	# Reset global winner var
 	winner = False
-
-"""
-MAIN PROGRAM
-
-"""
-
-winner = False
 
 if __name__ == '__main__':
 	main()
@@ -166,4 +170,4 @@ if __name__ == '__main__':
 	while input('Play again? (y/n)\n> ') == 'y':
 		main()
 		sleep(.5)
-	printTitle('Hit the road, Jack!')
+	printTitle(goodbye)
