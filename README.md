@@ -1,2 +1,2 @@
 # blackJack
-a CLI black jack game
+A CLI black jack game - You vs. the dealer!
