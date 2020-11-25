@@ -1,7 +1,7 @@
 # Black Jack
 *A CLI black jack game - You vs. the dealer!*
 
-**This is one of the first complete programs I wrote after learning how to use classes in Python. Pretty rudimentary. Might come back to it eventually and add more. Finishing this also made me interseted in looking into how to distribute this in a way other than just a .py file. Anyway, back to learning.**
+**This is one of the first complete programs I wrote after learning how to use classes in Python. Pretty rudimentary. Might come back to it eventually and add more. Finishing this also made me interseted in looking into how to distribute it in a way other than just a .py file. We'll see how that goes. Anyway, back to learning.**
 
 **Thanks for stopping by,**
 
